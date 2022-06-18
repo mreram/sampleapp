@@ -19,7 +19,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package ca.gedge.radixtree;
+package com.eram.backbase.radix;
 
 /**
  * An interface for implementing visitors that can traverse {@link RadixTree}.

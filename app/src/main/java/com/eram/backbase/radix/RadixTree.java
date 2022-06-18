@@ -19,7 +19,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package ca.gedge.radixtree;
+package com.eram.backbase.radix;
 
 import java.io.Serializable;
 import java.util.AbstractMap;
@@ -187,9 +187,9 @@ public class RadixTree<V extends Serializable> implements Map<String, V>, Serial
 	 * 
 	 * @throws NullPointerException if prefix is <code>null</code>
 	 */
-	public List<Map.Entry<String, V>> getEntriesWithPrefix(String prefix) {
-		RadixTreeVisitor<V, List<Map.Entry<String, V>>> visitor = new RadixTreeVisitor<V, List<Map.Entry<String, V>>>() {
-			final List<Map.Entry<String, V>> result = new ArrayList<Map.Entry<String, V>>();
+	public List<Entry<String, V>> getEntriesWithPrefix(String prefix) {
+		RadixTreeVisitor<V, List<Entry<String, V>>> visitor = new RadixTreeVisitor<V, List<Entry<String, V>>>() {
+			final List<Entry<String, V>> result = new ArrayList<Entry<String, V>>();
 			
 			@Override
 			public void visit(String key, V value) {
@@ -197,7 +197,7 @@ public class RadixTree<V extends Serializable> implements Map<String, V>, Serial
 			}
 
 			@Override
-			public List<Map.Entry<String, V>> getResult() {
+			public List<Entry<String, V>> getResult() {
 				return result;
 			}
 		};
@@ -272,7 +272,7 @@ public class RadixTree<V extends Serializable> implements Map<String, V>, Serial
 
 	@Override
 	public void putAll(Map<? extends String, ? extends V> map) {
-		for(Map.Entry<? extends String, ? extends V> entry : map.entrySet())
+		for(Entry<? extends String, ? extends V> entry : map.entrySet())
 			put(entry.getKey(), entry.getValue());
 	}
 
@@ -296,13 +296,13 @@ public class RadixTree<V extends Serializable> implements Map<String, V>, Serial
 	}
 
 	@Override
-	public Set<Map.Entry<String, V>> entrySet() {
+	public Set<Entry<String, V>> entrySet() {
 		// TODO documentation Of Map.entrySet() specifies that this is a view of
 		//      the entries, and modifications to this collection should be
 		//      reflected in the parent structure
 		//
-		RadixTreeVisitor<V, Set<Map.Entry<String, V>>> visitor = new RadixTreeVisitor<V, Set<Map.Entry<String, V>>>() {
-			final Set<Map.Entry<String, V>> result = new HashSet<Map.Entry<String, V>>();
+		RadixTreeVisitor<V, Set<Entry<String, V>>> visitor = new RadixTreeVisitor<V, Set<Entry<String, V>>>() {
+			final Set<Entry<String, V>> result = new HashSet<Entry<String, V>>();
 			
 			@Override
 			public void visit(String key, V value) {
@@ -310,7 +310,7 @@ public class RadixTree<V extends Serializable> implements Map<String, V>, Serial
 			}
 
 			@Override
-			public Set<Map.Entry<String, V>> getResult() {
+			public Set<Entry<String, V>> getResult() {
 				return result;
 			}
 		};

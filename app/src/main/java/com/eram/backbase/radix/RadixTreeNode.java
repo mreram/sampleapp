@@ -19,7 +19,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package ca.gedge.radixtree;
+package com.eram.backbase.radix;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -46,7 +46,7 @@ class RadixTreeNode<V extends Serializable> implements Iterable<RadixTreeNode<V>
 	private boolean hasValue;
 	
 	/**
-	 * The children for this node. Note, because we use {@link TreeSet} here,
+	 * The children for this node. Note, because we use {@link java.util.TreeSet} here,
 	 * traversal of {@link RadixTree} will be in lexicographical order.
 	 */
 	private Collection<RadixTreeNode<V>> children;
