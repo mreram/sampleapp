@@ -1,4 +1,4 @@
-# Asignment
+# Assignment
 
 
 The approach uses the Radix tree because the performance is perfect for runtime searches and it is a memory-efficient solution. 
