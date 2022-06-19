@@ -3,6 +3,11 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'org.jetbrains.kotlin.plugin.allopen'
+}
+
+allOpen {
+    annotation 'com.eram.backbase.test.Mockable'
 }
 
 android {
@@ -64,6 +69,8 @@ dependencies {
 
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
-    testImplementation 'junit:junit:4.13.2'
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_version"
+
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation 'androidx.test:runner:1.4.0'
 }

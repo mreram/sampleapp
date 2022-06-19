@@ -8,8 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.eram.backbase.datasource.local.LocalDataSource
 import com.eram.backbase.model.City
 import com.eram.backbase.radix.RadixTree
+import com.eram.backbase.test.dispatchers.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.concurrent.locks.*
 import javax.inject.Inject
@@ -17,6 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val localDataSource: LocalDataSource,
+    private val dispatcher: DispatcherProvider,
     application: Application
 ) : AndroidViewModel(application) {
 
@@ -28,7 +29,7 @@ class MainViewModel @Inject constructor(
     private val reentrantLock = ReentrantLock()
 
     fun onCreated() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcher.io) {
             reentrantLock.lock()
             val cities = localDataSource.getCities(getApplication()).sortedBy {
                 it.name + it.country
