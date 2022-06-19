@@ -16,6 +16,8 @@ class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = requireNotNull(_binding)
 
+    private val adapter = CityAdapter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
@@ -26,25 +28,35 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupObservers() {
+        viewModel.displayLiveData.observe(this) { cities ->
+            if (adapter.currentList.isNotEmpty()) {
+                adapter.submitList(null)
+            }
+            adapter.submitList(ArrayList(cities))
+        }
     }
 
     private fun initUI() {
+        with(binding) {
+            rv.adapter = adapter
+            rv.itemAnimator = null
+            searchInput.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+                android.widget.SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String): Boolean {
+                    viewModel.onQuerySubmit(query)
+                    return false
+                }
 
-        binding.searchInput.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
-            android.widget.SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                viewModel.onQuerySubmit(query)
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                return this.onQueryTextSubmit(newText)
-            }
-        })
+                override fun onQueryTextChange(newText: String): Boolean {
+                    return this.onQueryTextSubmit(newText)
+                }
+            })
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        _binding?.rv?.adapter = null
         _binding = null
     }
 }
