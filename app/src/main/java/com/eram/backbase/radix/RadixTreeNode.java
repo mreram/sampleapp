@@ -55,7 +55,6 @@ class RadixTreeNode<V extends Serializable> implements Iterable<RadixTreeNode<V>
 	 * Constructs a node from the given prefix.
 	 * 
 	 * @param prefix  the prefix
-	 * @param value  the value
 	 */
 	RadixTreeNode(String prefix) {
 		this(prefix, null);

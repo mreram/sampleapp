@@ -29,6 +29,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -139,7 +140,7 @@ public class RadixTree<V extends Serializable> implements Map<String, V>, Serial
 			
 			@Override
 			public void visit(String key, V value) {
-				if(val == value || (value != null && value.equals(val)))
+				if(Objects.equals(value, val))
 					found = true;
 			}
 
@@ -189,75 +190,15 @@ public class RadixTree<V extends Serializable> implements Map<String, V>, Serial
 	 */
 	public List<Entry<String, V>> getEntriesWithPrefix(String prefix) {
 		RadixTreeVisitor<V, List<Entry<String, V>>> visitor = new RadixTreeVisitor<V, List<Entry<String, V>>>() {
-			final List<Entry<String, V>> result = new ArrayList<Entry<String, V>>();
+			final List<Entry<String, V>> result = new ArrayList<>();
 			
 			@Override
 			public void visit(String key, V value) {
-				result.add(new AbstractMap.SimpleEntry<String, V>(key, value));
+				result.add(new AbstractMap.SimpleEntry<>(key, value));
 			}
 
 			@Override
 			public List<Entry<String, V>> getResult() {
-				return result;
-			}
-		};
-		visit(visitor, prefix);
-		return visitor.getResult();
-	}
-	
-	/**
-	 * Gets a list of values whose associated keys have the given prefix.
-	 * 
-	 * @param prefix  the prefix to look for
-	 * 
-	 * @return the list of values
-	 * 
-	 * @throws NullPointerException if prefix is <code>null</code>
-	 */
-	public List<V> getValuesWithPrefix(String prefix) {
-		if(prefix == null)
-			throw new NullPointerException("prefix cannot be null");
-		
-		RadixTreeVisitor<V, List<V>> visitor = new RadixTreeVisitor<V, List<V>>() {
-			final List<V> result = new ArrayList<V>();
-			
-			@Override
-			public void visit(String key, V value) {
-				result.add(value);
-			}
-
-			@Override
-			public List<V> getResult() {
-				return result;
-			}
-		};
-		visit(visitor, prefix);
-		return visitor.getResult();
-	}
-	
-	/**
-	 * Gets a list of keys with the given prefix.
-	 * 
-	 * @param prefix  the prefix to look for
-	 * 
-	 * @return the list of prefixes
-	 * 
-	 * @throws NullPointerException if prefix is <code>null</code>
-	 */
-	public List<String> getKeysWithPrefix(String prefix) {
-		if(prefix == null)
-			throw new NullPointerException("prefix cannot be null");
-		
-		RadixTreeVisitor<V, List<String>> visitor = new RadixTreeVisitor<V, List<String>>() {
-			final List<String> result = new ArrayList<String>();
-			
-			@Override
-			public void visit(String key, V value) {
-				result.add(key);
-			}
-
-			@Override
-			public List<String> getResult() {
 				return result;
 			}
 		};
