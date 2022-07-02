@@ -5,6 +5,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.eram.backbase.datasource.local.LocalDataSource
 import com.eram.backbase.model.City
+import com.eram.backbase.model.view.CityItem
 import com.eram.backbase.test.dispatchers.TestDispatcherProvider
 import com.google.gson.Gson
 import com.nhaarman.mockitokotlin2.*
@@ -36,8 +37,8 @@ class MainViewModelTest {
 
     @Test
     fun `onCreated called with a large data of cities`() {
-        val observer = mock<Observer<List<City>>>()
-        val argumentCaptor = argumentCaptor<List<City>>()
+        val observer = mock<Observer<List<CityItem>>>()
+        val argumentCaptor = argumentCaptor<List<CityItem>>()
         whenever(localDataSource.getCities(application)).thenReturn(citiesData)
         viewModel.displayLiveData.observeForever(observer)
         viewModel.onCreated()
@@ -46,8 +47,8 @@ class MainViewModelTest {
 
     @Test
     fun `onQuerySubmit called with a sample query`() {
-        val observer = mock<Observer<List<City>>>()
-        val argumentCaptor = argumentCaptor<List<City>>()
+        val observer = mock<Observer<List<CityItem>>>()
+        val argumentCaptor = argumentCaptor<List<CityItem>>()
         whenever(localDataSource.getCities(application)).thenReturn(citiesData)
         viewModel.displayLiveData.observeForever(observer)
         viewModel.onCreated()
@@ -57,7 +58,7 @@ class MainViewModelTest {
 
     @Test
     fun `onQuerySubmit called with an empty query`() {
-        val observer = mock<Observer<List<City>>>()
+        val observer = mock<Observer<List<CityItem>>>()
         whenever(localDataSource.getCities(application)).thenReturn(citiesData)
         viewModel.displayLiveData.observeForever(observer)
         viewModel.onQuerySubmit("")
@@ -66,7 +67,7 @@ class MainViewModelTest {
 
     @Test
     fun `onQuerySubmit called when initial data is empty`() {
-        val observer = mock<Observer<List<City>>>()
+        val observer = mock<Observer<List<CityItem>>>()
         whenever(localDataSource.getCities(application)).thenReturn(citiesData)
         viewModel.displayLiveData.observeForever(observer)
         viewModel.onQuerySubmit("")
