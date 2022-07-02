@@ -44,9 +44,6 @@ class MainFragment : Fragment() {
 
     private fun setupObservers() {
         viewModel.displayLiveData.observe(viewLifecycleOwner) { cities ->
-            if (adapter.currentList.isNotEmpty()) {
-                adapter.submitList(null)
-            }
             adapter.submitList(ArrayList(cities))
         }
     }
@@ -58,6 +55,7 @@ class MainFragment : Fragment() {
             searchInput.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
                 android.widget.SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
+                    adapter.submitList(null)
                     viewModel.onQuerySubmit(query)
                     return false
                 }

@@ -11,7 +11,7 @@
         android:label="MainFragment" />
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.eram.backbase.main.ui.MapFragment"
+        android:name="com.eram.backbase.map.MapFragment"
         android:label="MapFragment">
         <argument
             android:name="latLng"
