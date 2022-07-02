@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import com.eram.backbase.databinding.ActivityMainBinding
 import com.eram.backbase.main.viewmodel.MainViewModel
+import com.eram.backbase.model.view.CityItem
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = requireNotNull(_binding)
 
-    private val adapter = CityAdapter()
+    private val adapter = CityAdapter(onItemClicked = ::onItemClicked)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +26,10 @@ class MainActivity : AppCompatActivity() {
         initUI()
         setupObservers()
         viewModel.onCreated()
+    }
+
+    private fun onItemClicked(cityItem: CityItem) {
+
     }
 
     private fun setupObservers() {

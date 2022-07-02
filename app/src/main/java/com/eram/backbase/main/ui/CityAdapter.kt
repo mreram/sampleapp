@@ -7,7 +7,9 @@ import com.eram.backbase.databinding.ItemCityBinding
 import com.eram.backbase.main.util.CityDiffCallback
 import com.eram.backbase.model.view.CityItem
 
-class CityAdapter : ListAdapter<CityItem, CityViewHolder>(CityDiffCallback()) {
+class CityAdapter(
+    private val onItemClicked: (CityItem) -> Unit
+) : ListAdapter<CityItem, CityViewHolder>(CityDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
         return CityViewHolder(
@@ -15,7 +17,8 @@ class CityAdapter : ListAdapter<CityItem, CityViewHolder>(CityDiffCallback()) {
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ),
+            onItemClicked
         )
     }
 
