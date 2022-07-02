@@ -30,6 +30,9 @@ class MainViewModel @Inject constructor(
     private val reentrantLock = ReentrantLock()
 
     fun onCreated() {
+        if (_displayLiveData.value.isNullOrEmpty().not()) {
+            return
+        }
         viewModelScope.launch(dispatcher.io) {
             reentrantLock.lock()
             val cities = localDataSource.getCities(getApplication()).sortedBy {

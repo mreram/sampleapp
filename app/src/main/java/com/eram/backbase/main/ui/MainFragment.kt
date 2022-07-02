@@ -1,17 +1,20 @@
 package com.eram.backbase.main.ui
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.eram.backbase.R
 import com.eram.backbase.databinding.FragmentMainBinding
 import com.eram.backbase.main.viewmodel.MainViewModel
 import com.eram.backbase.model.view.CityItem
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainFragment : Fragment(R.layout.fragment_main) {
+@AndroidEntryPoint
+class MainFragment : Fragment() {
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -19,6 +22,15 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private val binding get() = requireNotNull(_binding)
 
     private val adapter = CityAdapter(onItemClicked = ::onItemClicked)
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initUI()

@@ -5,7 +5,9 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.eram.backbase.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MapFragment : Fragment(R.layout.fragment_map) {
 
     private val args: MapFragmentArgs by navArgs()
