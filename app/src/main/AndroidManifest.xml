@@ -13,6 +13,14 @@
         android:name=".AppClass"
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC6kVnn_oO3ZkUth1i2HlQhGJThxcZA6kg" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
         <activity
             android:name=".main.ui.MainActivity"
             android:exported="true">

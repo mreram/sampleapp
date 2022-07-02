@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.eram.backbase.main.ui.MainFragment"
+        android:label="MainFragment" />
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.eram.backbase.map.MapFragment"
+        android:label="MapFragment">
+        <argument
+            android:name="latLng"
+            app:argType="com.google.android.gms.maps.model.LatLng" />
+    </fragment>
+    <action
+        android:id="@+id/navigate_to_map"
+        app:destination="@id/mapFragment" />
+</navigation>
