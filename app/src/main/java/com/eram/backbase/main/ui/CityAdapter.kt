@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.eram.backbase.databinding.ItemCityBinding
 import com.eram.backbase.main.util.CityDiffCallback
-import com.eram.backbase.model.City
+import com.eram.backbase.model.view.CityItem
 
-class CityAdapter : ListAdapter<City, CityViewHolder>(CityDiffCallback()) {
+class CityAdapter : ListAdapter<CityItem, CityViewHolder>(CityDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
         return CityViewHolder(
