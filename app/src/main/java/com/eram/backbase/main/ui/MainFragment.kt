@@ -5,6 +5,7 @@ import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.eram.backbase.R
 import com.eram.backbase.databinding.FragmentMainBinding
 import com.eram.backbase.main.viewmodel.MainViewModel
@@ -26,6 +27,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun onItemClicked(cityItem: CityItem) {
+        findNavController().navigate(MainFragmentDirections.navigateToMap(cityItem.coordinates))
     }
 
     private fun setupObservers() {
