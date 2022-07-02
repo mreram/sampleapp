@@ -6,9 +6,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.eram.backbase.datasource.local.LocalDataSource
-import com.eram.backbase.model.City
+import com.eram.backbase.model.view.CityItem
 import com.eram.backbase.radix.RadixTree
 import com.eram.backbase.test.dispatchers.DispatcherProvider
+import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.concurrent.locks.*
@@ -21,10 +22,10 @@ class MainViewModel @Inject constructor(
     application: Application
 ) : AndroidViewModel(application) {
 
-    private val radixTree = RadixTree<City>()
+    private val radixTree = RadixTree<CityItem>()
 
-    private var _displayLiveData = MutableLiveData<List<City>>()
-    val displayLiveData: LiveData<List<City>> = _displayLiveData
+    private var _displayLiveData = MutableLiveData<List<CityItem>>()
+    val displayLiveData: LiveData<List<CityItem>> = _displayLiveData
 
     private val reentrantLock = ReentrantLock()
 
@@ -33,6 +34,13 @@ class MainViewModel @Inject constructor(
             reentrantLock.lock()
             val cities = localDataSource.getCities(getApplication()).sortedBy {
                 it.name + it.country
+            }.map {
+                CityItem(
+                    it.id,
+                    it.name,
+                    it.country,
+                    LatLng(it.coordinates.lat, it.coordinates.lon)
+                )
             }
             _displayLiveData.postValue(cities)
             cities.forEach { radixTree[(it.name + ", " + it.country).lowercase()] = it }
