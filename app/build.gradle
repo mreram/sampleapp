@@ -61,7 +61,9 @@ dependencies {
     androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_core_version"
     kaptAndroidTest "com.google.dagger:hilt-compiler:$hilt_core_version"
 
-    implementation "com.google.code.gson:gson:2.8.9"
+    implementation "com.google.code.gson:gson:2.9.0"
+
+    implementation "com.google.android.gms:play-services-maps:18.0.2"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
