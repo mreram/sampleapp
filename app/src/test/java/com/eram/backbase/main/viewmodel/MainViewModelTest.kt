@@ -47,13 +47,15 @@ class MainViewModelTest {
 
     @Test
     fun `onQuerySubmit called with a sample query`() {
+        val sampleQuery = "Iran"
         val observer = mock<Observer<List<CityItem>>>()
         val argumentCaptor = argumentCaptor<List<CityItem>>()
         whenever(localDataSource.getCities(application)).thenReturn(citiesData)
         viewModel.displayLiveData.observeForever(observer)
         viewModel.onCreated()
-        viewModel.onQuerySubmit("Iran")
+        viewModel.onQuerySubmit(sampleQuery)
         verify(observer, times(2)).onChanged(argumentCaptor.capture())
+        assert(argumentCaptor.lastValue.all { it.name.contains(sampleQuery) })
     }
 
     @Test
